@@ -2,15 +2,15 @@ import streamlit as st
 import google.generativeai as genai
 import os
 
-# 1. Настройка ИИ
-# Пытаемся взять ключ из секретов (для облака) или из окружения
+# Настройка ИИ с "умным" подбором модели
 api_key = st.secrets.get("GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY")
 
 if api_key:
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    # Используем актуальное имя модели
+    model = genai.GenerativeModel('gemini-1.5-flash') 
 else:
-    st.error("Ключ API не найден! Добавь его в Settings -> Secrets")
+    st.error("Ключ API не найден!")
 
 # 2. Настройка интерфейса для iPad
 st.set_page_config(page_title="Life Manager", page_icon="🧘", layout="centered")
